@@ -35,8 +35,7 @@
   .version-container {
     border: 1px solid #ccc;
     margin-bottom: 15px;
-    border-radius: 6px;
-    overflow: hidden;
+    border-radius: 4px;
   }
   .version-header {
     background-color: #f7f7f7;
@@ -62,7 +61,7 @@
   }
   .version-content {
     display: none;
-    padding: 0 20px;
+    padding: 20px;
     border-top: 1px solid #ccc;
     background-color: #fff;
   }
@@ -70,32 +69,15 @@
     display: block;
   }
 
-  /* Professional Section Item Styling with Dividers */
-  .version-item {
-    padding: 16px 0;
+  /* Every single line gets its own row with a bottom border */
+  .version-line {
+    padding: 10px 0;
     border-bottom: 1px solid #eaeaea;
-  }
-  .version-item:last-child {
-    border-bottom: none; /* Removes line on the very last item */
-  }
-
-  .version-title {
-    font-weight: bold;
-    font-size: 15px;
-    color: #111;
-    margin-bottom: 4px;
-  }
-  
-  .version-desc {
     font-size: 14px;
-    color: #555;
-    line-height: 1.5;
-    margin: 0;
+    color: #333;
   }
-  
-  .error-text {
-    color: red;
-    padding: 15px 0;
+  .version-line:last-child {
+    border-bottom: none;
   }
 </style>
 </head>
@@ -130,45 +112,31 @@
     async function loadVersions() {
       const container = document.getElementById('versions-list');
 
-      for (let index = 0; index < versions.length; index++) {
-        const version = versions[index];
+      for (let i = 0; i < versions.length; i++) {
+        const version = versions[i];
         const id = "v" + version.replace(/\./g, "-");
-        const isActive = index === 0 ? 'active' : '';
+        const isActive = i === 0 ? 'active' : '';
 
         let formattedContent = '';
 
         try {
           const response = await fetch(`versions/${version}.txt`);
-          if (!response.ok) {
-            throw new Error(`File not found (Status: ${response.status})`);
-          }
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
           const text = await response.text();
+          
+          // Split text file strictly by line breaks
           const lines = text.split(/\r?\n/);
           
-          let currentTitle = '';
-          let currentDesc = '';
-
-          for (let i = 0; i < lines.length; i++) {
-            const line = lines[i].trim();
-            if (line !== '') {
-              if (i % 2 === 0) {
-                currentTitle = line;
-              } else {
-                currentDesc = line;
-                // Once we have both a title and description, wrap them in a professional section card with a divider line
-                formattedContent += `
-                  <div class="version-item">
-                    <div class="version-title">${currentTitle}</div>
-                    <div class="version-desc">${currentDesc}</div>
-                  </div>
-                `;
-              }
+          for (const line of lines) {
+            if (line.trim() !== '') {
+              // Wrap every single line in its own distinct row with a divider line
+              formattedContent += `<div class="version-line">${line}</div>`;
             }
           }
         } catch (err) {
           console.error("Failed to load version:", version, err);
-          formattedContent = `<div class="error-text">Could not load versions/${version}.txt.</div>`;
+          formattedContent = `<div style="color: red;">Failed to load version file.</div>`;
         }
 
         const html = `
