@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cranbero Past History</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .tab-bar {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  .tab-link {
+    display: inline-block;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+  }
+  .tab-link.active {
+    background: #ffffff;
+    font-weight: bold;
+  }
+
+  .version-container {
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    border-radius: 4px;
+  }
+  .version-header {
+    background-color: #f7f7f7;
+    padding: 15px 20px;
+    margin: 0;
+    cursor: pointer;
+    font-size: 20px;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .version-header:hover {
+    background-color: #eee;
+  }
+  .version-header::after {
+    content: '+';
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .version-container.active .version-header::after {
+    content: '-';
+  }
+  .version-content {
+    display: none;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    background-color: #fff;
+  }
+  .version-container.active .version-content {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+  <div class="tab-bar">
+    <a href="index.html" class="tab-link">License</a>
+    <a href="history.html" class="tab-link active">Past History</a>
+  </div>
+
+  <h1>Past History</h1>
+  <p>This is the past history section.</p>
+
+  <!-- Versions will be loaded here -->
+  <div id="versions-list"></div>
+
+  <footer style="margin-top: 50px; padding-top: 15px; border-top: 1px solid #ccc; font-size: 14px; color: #555;">
+    Cranbero Open-Source website. Use license if needed. October, 2026
+  </footer>
+
+  <script>
+    // List the versions you want to load (add more here when you create new files)
+    const versions = [
+      "26.0.2",
+      "26.0.3"
+    ];
+
+    function toggleVersion(id) {
+      const element = document.getElementById(id);
+      element.classList.toggle('active');
+    }
+
+    async function loadVersions() {
+      const container = document.getElementById('versions-list');
+
+      for (const version of versions) {
+        try {
+          const response = await fetch(`versions/${version}.txt`);
+          const content = await response.text();
+
+          const id = "v" + version.replace(/\./g, "-");
+
+          const html = `
+            <div class="version-container" id="${id}">
+              <h1 class="version-header" onclick="toggleVersion('${id}')">${version}</h1>
+              <div class="version-content">
+                ${content}
+              </div>
+            </div>
+          `;
+
+          container.innerHTML += html;
+        } catch (err) {
+          console.error("Failed to load version:", version);
+        }
+      }
+    }
+
+    loadVersions();
+  </script>
+
+</body>
+</html>
