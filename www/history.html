@@ -68,6 +68,12 @@
   .version-container.active .version-content {
     display: block;
   }
+
+  /* Style for individual lines */
+  .version-line {
+    margin: 0 0 10px 0;
+    line-height: 1.5;
+  }
 </style>
 </head>
 <body>
@@ -105,15 +111,26 @@
       for (const version of versions) {
         try {
           const response = await fetch(`versions/${version}.txt`);
-          const content = await response.text();
+          const text = await response.text();
+
+          // Split the text file content line by line
+          const lines = text.split(/\r?\n/);
+          
+          // Generate HTML for each line (ignoring completely empty lines if desired)
+          let formattedContent = '';
+          for (const line of lines) {
+            if (line.trim() !== '') {
+              formattedContent += `<div class="version-line">${line}</div>`;
+            }
+          }
 
           const id = "v" + version.replace(/\./g, "-");
 
           const html = `
             <div class="version-container" id="${id}">
-              <h1 class="version-header" onclick="toggleVersion('${id}')">${version}</h1>
+              <h2 class="version-header" onclick="toggleVersion('${id}')">${version}</h2>
               <div class="version-content">
-                ${content}
+                ${formattedContent}
               </div>
             </div>
           `;
