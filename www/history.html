@@ -35,7 +35,8 @@
   .version-container {
     border: 1px solid #ccc;
     margin-bottom: 15px;
-    border-radius: 4px;
+    border-radius: 6px;
+    overflow: hidden;
   }
   .version-header {
     background-color: #f7f7f7;
@@ -61,7 +62,7 @@
   }
   .version-content {
     display: none;
-    padding: 20px;
+    padding: 0 20px;
     border-top: 1px solid #ccc;
     background-color: #fff;
   }
@@ -69,20 +70,32 @@
     display: block;
   }
 
-  /* Specific styles for alternating lines */
+  /* Professional Section Item Styling with Dividers */
+  .version-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #eaeaea;
+  }
+  .version-item:last-child {
+    border-bottom: none; /* Removes line on the very last item */
+  }
+
   .version-title {
     font-weight: bold;
-    font-size: 16px;
-    margin-top: 15px;
-    color: #333;
+    font-size: 15px;
+    color: #111;
+    margin-bottom: 4px;
   }
-  .version-title:first-child {
-    margin-top: 0;
-  }
+  
   .version-desc {
-    margin: 5px 0 15px 0;
-    color: #666;
-    line-height: 1.4;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+    margin: 0;
+  }
+  
+  .error-text {
+    color: red;
+    padding: 15px 0;
   }
 </style>
 </head>
@@ -117,43 +130,57 @@
     async function loadVersions() {
       const container = document.getElementById('versions-list');
 
-      for (const version of versions) {
+      for (let index = 0; index < versions.length; index++) {
+        const version = versions[index];
+        const id = "v" + version.replace(/\./g, "-");
+        const isActive = index === 0 ? 'active' : '';
+
+        let formattedContent = '';
+
         try {
           const response = await fetch(`versions/${version}.txt`);
-          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          if (!response.ok) {
+            throw new Error(`File not found (Status: ${response.status})`);
+          }
 
           const text = await response.text();
           const lines = text.split(/\r?\n/);
           
-          let formattedContent = '';
+          let currentTitle = '';
+          let currentDesc = '';
+
           for (let i = 0; i < lines.length; i++) {
             const line = lines[i].trim();
             if (line !== '') {
-              // Even lines (0, 2, 4...) become THING (Titles)
-              // Odd lines (1, 3, 5...) become text in thing (Descriptions)
               if (i % 2 === 0) {
-                formattedContent += `<div class="version-title">${line}</div>`;
+                currentTitle = line;
               } else {
-                formattedContent += `<div class="version-desc">${line}</div>`;
+                currentDesc = line;
+                // Once we have both a title and description, wrap them in a professional section card with a divider line
+                formattedContent += `
+                  <div class="version-item">
+                    <div class="version-title">${currentTitle}</div>
+                    <div class="version-desc">${currentDesc}</div>
+                  </div>
+                `;
               }
             }
           }
-
-          const id = "v" + version.replace(/\./g, "-");
-
-          const html = `
-            <div class="version-container" id="${id}">
-              <h2 class="version-header" onclick="toggleVersion('${id}')">${version}</h2>
-              <div class="version-content">
-                ${formattedContent}
-              </div>
-            </div>
-          `;
-
-          container.insertAdjacentHTML('beforeend', html);
         } catch (err) {
           console.error("Failed to load version:", version, err);
+          formattedContent = `<div class="error-text">Could not load versions/${version}.txt.</div>`;
         }
+
+        const html = `
+          <div class="version-container ${isActive}" id="${id}">
+            <h2 class="version-header" onclick="toggleVersion('${id}')">${version}</h2>
+            <div class="version-content">
+              ${formattedContent}
+            </div>
+          </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', html);
       }
     }
 
