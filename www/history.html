@@ -69,10 +69,20 @@
     display: block;
   }
 
-  /* Style for individual lines */
-  .version-line {
-    margin: 0 0 10px 0;
-    line-height: 1.5;
+  /* Specific styles for alternating lines */
+  .version-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 15px;
+    color: #333;
+  }
+  .version-title:first-child {
+    margin-top: 0;
+  }
+  .version-desc {
+    margin: 5px 0 15px 0;
+    color: #666;
+    line-height: 1.4;
   }
 </style>
 </head>
@@ -94,7 +104,6 @@
   </footer>
 
   <script>
-    // List the versions you want to load (add more here when you create new files)
     const versions = [
       "26.0.2",
       "26.0.3"
@@ -111,16 +120,22 @@
       for (const version of versions) {
         try {
           const response = await fetch(`versions/${version}.txt`);
-          const text = await response.text();
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-          // Split the text file content line by line
+          const text = await response.text();
           const lines = text.split(/\r?\n/);
           
-          // Generate HTML for each line (ignoring completely empty lines if desired)
           let formattedContent = '';
-          for (const line of lines) {
-            if (line.trim() !== '') {
-              formattedContent += `<div class="version-line">${line}</div>`;
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (line !== '') {
+              // Even lines (0, 2, 4...) become THING (Titles)
+              // Odd lines (1, 3, 5...) become text in thing (Descriptions)
+              if (i % 2 === 0) {
+                formattedContent += `<div class="version-title">${line}</div>`;
+              } else {
+                formattedContent += `<div class="version-desc">${line}</div>`;
+              }
             }
           }
 
@@ -135,9 +150,9 @@
             </div>
           `;
 
-          container.innerHTML += html;
+          container.insertAdjacentHTML('beforeend', html);
         } catch (err) {
-          console.error("Failed to load version:", version);
+          console.error("Failed to load version:", version, err);
         }
       }
     }
