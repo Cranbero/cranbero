@@ -10,12 +10,21 @@
     padding: 20px;
     background-color: #ffffff;
     color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
+  .main-wrapper {
+    width: 100%;
+    max-width: 800px;
+  }
+
   /* Tab Bar */
   .tab-bar {
     border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
+    width: 100%;
   }
   .tab-link {
     display: inline-block;
@@ -36,15 +45,17 @@
 </head>
 <body>
 
-  <!-- Tab Navigation Links -->
-  <div class="tab-bar">
-    <a href="index.html" class="tab-link active">License</a>
-    <a href="history.html" class="tab-link">Past History</a>
-  </div>
+  <div class="main-wrapper">
+    <!-- Tab Navigation Links -->
+    <div class="tab-bar">
+      <a href="index.html" class="tab-link active">License</a>
+      <a href="history.html" class="tab-link">Past History</a>
+    </div>
 
-  <!-- Page Content -->
-  <h1>Cranbero License</h1>
-  <p>This is the license information for Cranbero.</p>
+    <!-- Page Content -->
+    <h1>Cranbero License</h1>
+    <p>This is the license information for Cranbero.</p>
+  </div>
 
 </body>
 </html>
