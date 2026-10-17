@@ -10,11 +10,20 @@
     padding: 20px;
     background-color: #ffffff;
     color: #000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
+  .main-wrapper {
+    width: 100%;
+    max-width: 800px;
+  }
+
   .tab-bar {
     border-bottom: 1px solid #ccc;
     margin-bottom: 20px;
+    width: 100%;
   }
   .tab-link {
     display: inline-block;
@@ -36,6 +45,7 @@
     border: 1px solid #ccc;
     margin-bottom: 15px;
     border-radius: 4px;
+    width: 100%;
   }
   .version-header {
     background-color: #f7f7f7;
@@ -64,28 +74,41 @@
     padding: 20px;
     border-top: 1px solid #ccc;
     background-color: #fff;
+    white-space: pre-line;
   }
   .version-container.active .version-content {
     display: block;
+  }
+
+  footer {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 50px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    font-size: 14px;
+    color: #555;
   }
 </style>
 </head>
 <body>
 
-  <div class="tab-bar">
-    <a href="index.html" class="tab-link">License</a>
-    <a href="history.html" class="tab-link active">Past History</a>
+  <div class="main-wrapper">
+    <div class="tab-bar">
+      <a href="index.html" class="tab-link">License</a>
+      <a href="history.html" class="tab-link active">Past History</a>
+    </div>
+
+    <h1>Past History</h1>
+    <p>This is the past history section.</p>
+
+    <!-- Versions will be loaded here -->
+    <div id="versions-list"></div>
+
+    <footer>
+      Cranbero Open-Source website. Use license if needed. October, 2026
+    </footer>
   </div>
-
-  <h1>Past History</h1>
-  <p>This is the past history section.</p>
-
-  <!-- Versions will be loaded here -->
-  <div id="versions-list"></div>
-
-  <footer style="margin-top: 50px; padding-top: 15px; border-top: 1px solid #ccc; font-size: 14px; color: #555;">
-    Cranbero Open-Source website. Use license if needed. October, 2026
-  </footer>
 
   <script>
     // List the versions you want to load (add more here when you create new files)
