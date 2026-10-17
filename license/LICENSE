@@ -1,9 +1,8 @@
 Cranbero License
-Version 26.0.3 October, 2026
 
+Version 26.1.0 October, 2026
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 Established by  Seok-bong, Hunter Tigner.
-
 
 1. Redistributing base-projects
 
@@ -36,20 +35,33 @@ redistributing the new-project and converting it into an illegal new-project, wi
 8. Revocation time
 
 Revocation Time (Required by base-project) Revocation Time is required for creators of base-project but must include a valid date within 70 to 125 days. Revocation Time date is required for the base-project. Revocation Time is required.  
-this is for if the base-project creators, don't want people immediately coming back to use base-project after 70 days.
+this is for if the base-project creators, don't want people immediately coming back to use base-project after a few days.
 
 9. Revocation of rights
 
-$250-fine if the base-project contains, 95 assets, with 5,000 lines of program-code (not text)
-$1,000-fine if the base-project contains, 190 assets, with 6,250 lines of program-code (not text)
-$4,000-fine if the base-project contains, 380 assets, with 8,560 lines of program-code (not text)
+$54-fine if the base-project contains, 95 assets, with 5,000 lines of program-code (not text) (No Paid assets)
+$27-fine if the base-project contains, 95 assets, with 5,000 lines of program-code (not text) (Paid assets)
+
+$54-fine if the base-project contains, 190 assets, with 6,250 lines of program-code (not text) (No Paid assets)
+$108-fine if the base-project contains, 190 assets, with 6,250 lines of program-code (not text) (Paid assets)
+
+$108-fine if the base-project contains, 380 assets, with 8,560 lines of program-code (not text) (No Paid assets)
+$216-fine if the base-project contains, 380 assets, with 8,560 lines of program-code (not text) (Paid assets)
+
+$362-fine if the base-project contains, 720 assets, with 18,120 lines of program-code (not text) (No Paid assets)
+$725-fine if the base-project contains, 720 assets, with 18,120 lines of program-code (not text) (Paid assets)
+
+$760-fine if the base-project contains, 1,520 assets, with 36,450 lines of program-code (not text) (No Paid assets)
+$1,520-fine if the base-project contains, 1,520 assets, with 36,450 lines of program-code (not text) (Paid assets)
+
+if a new-project copies this than they pay that amount to base-project authors, to use it again, not needed but pay if want to use or wait Revocation time (8), and if done again you wait again to use.
 
 10. Previous License Versions
 
-Any individual developer/team/company using previous license versions will stay on that license until they decide to update it. If not, they will continue on the old license version with the exact replica of the original license terms and
-conditions.
+Any individual developer/team/company using previous license versions will stay on that license until they decide to update it. If not, they will continue on the old license version with the exact replica of the original license terms and conditions.
 
 11. Dictionary
+
 $-fine = An owed amount of money, to use base-project, again if new-project revocations of rights.
 
 Revocation = Revoking rights and crossing the line 
@@ -66,4 +78,4 @@ Company = A large group of humans (100-5,000) that have created a new project or
 
 12. Limitation Of Liability for (Cranbero)
 
-Any individual developer/team/company using this license, if anything goes wrong using the license, for example, to abuse it: you can send feedback, but not sue us. If any individual computer has broken or passed the 0-10% harm rate, any individual cannot do any suing to Cranbero License due to, we have no fault creator is at fault if goes wrong within 0-10% harm-rate, if A individual/team/company using this license detects A abuse switch to A safer license or closed-source while we fix the abuse.
+Any individual developer/team/company using this license, if anything goes wrong using the license, for example, to abuse it: you can send feedback, but not sue us. If any individual computer has broken or passed the 0-10% harm rate, any individual cannot do any suing to Cranbero License due to, we have no fault creator is at fault if goes wrong within 0-10% harm-rate, if A individual/team/company using this license detects A abuse switch to A safer license or closed-source while we fix the abuse. 
