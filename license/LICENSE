@@ -1,6 +1,6 @@
 Cranbero License
 
-Version 26.1.0 October, 2026
+Version 26.1.1 October, 2026
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
 Established by  Seok-bong, Hunter Tigner.
 
@@ -26,7 +26,7 @@ Expiration Date (Optional by base-project) Expiration date is optional for creat
 
 6. Limitation Of Liability for (new-project / base-project)
 
-Damage of individuals computer, is not new-projects fault if new-project includes 0-10% harm rate (0-10% means file-move, file-delete, no system-breaks,) if more than 10% or more than list described, than new-project is at fault of visitors computer breaking.
+Damage of individuals computer, is not new-projects fault if new-project includes 0-10% harm rate (0.1:1.0 means file-move, file-delete, the percentage is only higher if program new-project, base-project.) if more than 0.1:1.0 or more than list described, than new-project is at fault of visitors computer breaking, counting damage done is simple. If 10 project files were deleted for an application with a few thousand lines in each, then this is verified as a 0.1.0:1.0, the extra one is the decimal of the tenth, example: 0.1:1.0 = 10%/100%, 0.1.0:1.0 =  1%/100%.
 
 7. Severability  
 
